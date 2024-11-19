@@ -1,8 +1,7 @@
-﻿using System.Net.Mail;
-
+﻿
 namespace TMS.Domain
 {
-    public class Task
+    public class Tasks
     {
         public Guid TaskId { get; set; }
         public string Title { get; set; }

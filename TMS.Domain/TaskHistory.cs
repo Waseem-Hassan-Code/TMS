@@ -10,7 +10,7 @@ namespace TMS.Domain
 
         // Foreign Keys
         public Guid TaskId { get; set; }
-        public Task Task { get; set; }
+        public Tasks Task { get; set; }
 
         public Guid PerformedByUserId { get; set; }
         public ApplicationUser PerformedBy { get; set; }

@@ -10,6 +10,6 @@
         // Foreign Key
         public Guid TaskId { get; set; }
 
-        public Task Task { get; set; }
+        public Tasks Task { get; set; }
     }
 }

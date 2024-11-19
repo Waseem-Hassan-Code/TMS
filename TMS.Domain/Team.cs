@@ -10,6 +10,6 @@ namespace TMS.Domain
 
         // Relationships
         public ICollection<ApplicationUser> Users { get; set; }
-        public ICollection<Task> Tasks { get; set; }
+        public ICollection<Tasks> Tasks { get; set; }
     }
 }

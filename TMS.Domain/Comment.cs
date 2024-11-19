@@ -11,7 +11,7 @@ namespace TMS.Domain
         // Foreign Keys
         public Guid TaskId { get; set; }
 
-        public Task Task { get; set; }
+        public Tasks Task { get; set; }
 
         public Guid UserId { get; set; }
         public ApplicationUser User { get; set; }
