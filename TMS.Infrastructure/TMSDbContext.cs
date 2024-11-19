@@ -32,8 +32,13 @@ public class TMSDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, 
         base.OnConfiguring(optionsBuilder);
     }
 
-    public DbSet<TMS.Domain.Tasks> Task { get; set; }
+    public DbSet<Tasks> Tasks { get; set; }
     public DbSet<Comment> Comments { get; set; }
+    public DbSet<Assignment> Assignments { get; set; }
+    public DbSet<Team> Teams { get; set; }
+    public DbSet<Notification> Notifications { get; set; }
+    public DbSet<Attachment> Attachments { get; set; }
+    public DbSet<TaskHistory> TaskHistories { get; set; }
     
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
