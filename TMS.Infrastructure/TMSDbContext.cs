@@ -43,6 +43,39 @@ public class TMSDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // Configure composite key for ApplicationUserToken
+        modelBuilder.Entity<ApplicationUserToken>(entity =>
+        {
+            // Ensure the composite key is recognized (it is defined in IdentityUserToken<Guid>)
+            entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name });
+
+            // Optionally configure the new fields (if necessary)
+            entity.Property(e => e.TokenId)
+                  .HasMaxLength(500);  // You can adjust the size as per your needs
+
+            entity.Property(e => e.CreatedOn)
+                  .HasColumnType("datetime");
+
+            entity.Property(e => e.ExpiresOn)
+                  .HasColumnType("datetime");
+
+            entity.Property(e => e.SessionGuid)
+                  .IsRequired();
+        });
+
+        modelBuilder.Entity<ApplicationUserRole>(entity =>
+        {
+            entity.HasKey(e => new { e.UserId, e.RoleId });
+
+            entity.HasOne(e => e.User)
+                .WithMany(u => u.UserRoles)
+                .HasForeignKey(e => e.UserId);
+
+            entity.HasOne(e => e.Role)
+                .WithMany(r => r.UserRoles)
+                .HasForeignKey(e => e.RoleId);
+        });
+
         modelBuilder.Entity<Assignment>()
             .HasOne(a => a.Task)
             .WithMany(t => t.Assignments)

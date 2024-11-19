@@ -5,6 +5,7 @@ namespace Domain.Entities.Identity;
 
 public class ApplicationUser : IdentityUser<Guid>
 {
+    public virtual ICollection<ApplicationUserRole> UserRoles { get; set; }
     public ICollection<Assignment> Assignments { get; set; }
     public ICollection<Comment> Comments { get; set; }
     public ICollection<Notification> Notifications { get; set; }
