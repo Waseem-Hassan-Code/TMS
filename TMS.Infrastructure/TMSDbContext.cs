@@ -22,7 +22,7 @@ public class TMSDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, 
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("IdentityConnection"), sqlServerOptions =>
+            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"), sqlServerOptions =>
             {
                 sqlServerOptions.CommandTimeout(300);
                 sqlServerOptions.MigrationsAssembly(typeof(TMSDbContext).Assembly.FullName);
