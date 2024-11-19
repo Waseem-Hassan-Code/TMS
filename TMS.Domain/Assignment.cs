@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Entities.Identity;
 
 namespace TMS.Domain
 {
@@ -13,12 +9,13 @@ namespace TMS.Domain
 
         // Foreign Keys
         public Guid TaskId { get; set; }
+
         public Task Task { get; set; }
 
         public Guid AssignedToUserId { get; set; }
-        public User AssignedTo { get; set; }
+        public ApplicationUser AssignedTo { get; set; }
 
         public Guid AssignedByUserId { get; set; }
-        public User AssignedBy { get; set; }
+        public ApplicationUser AssignedBy { get; set; }
     }
 }
