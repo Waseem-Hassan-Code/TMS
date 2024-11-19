@@ -32,6 +32,49 @@ public class TMSDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, 
         base.OnConfiguring(optionsBuilder);
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Assignment>()
+            .HasOne(a => a.Task)
+            .WithMany(t => t.Assignments)
+            .HasForeignKey(a => a.TaskId);
+
+        modelBuilder.Entity<Assignment>()
+            .HasOne(a => a.AssignedTo)
+            .WithMany(u => u.Assignments)
+            .HasForeignKey(a => a.AssignedToUserId);
+
+        modelBuilder.Entity<Assignment>()
+            .HasOne(a => a.AssignedBy)
+            .WithMany()
+            .HasForeignKey(a => a.AssignedByUserId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Comment>()
+            .HasOne(c => c.Task)
+            .WithMany(t => t.Comments)
+            .HasForeignKey(c => c.TaskId);
+
+        modelBuilder.Entity<Comment>()
+            .HasOne(c => c.User)
+            .WithMany(u => u.Comments)
+            .HasForeignKey(c => c.UserId);
+
+        modelBuilder.Entity<Notification>()
+            .HasOne(n => n.User)
+            .WithMany(u => u.Notifications)
+            .HasForeignKey(n => n.UserId);
+
+        modelBuilder.Entity<TaskHistory>()
+            .HasOne(th => th.Task)
+            .WithMany(t => t.TaskHistories)
+            .HasForeignKey(th => th.TaskId);
+
+        modelBuilder.Entity<TaskHistory>()
+            .HasOne(th => th.PerformedBy)
+            .WithMany(u => u.TaskHistories)
+            .HasForeignKey(th => th.PerformedByUserId);
+    }
 
     public int SaveChanges()
     {
